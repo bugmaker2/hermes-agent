@@ -1036,7 +1036,7 @@ def select_provider_and_model(args=None):
         "moonshot": "Moonshot (global direct API)",
         "minimax": "MiniMax",
         "minimax-cn": "MiniMax (China)",
-        "moonshot-cn": "Moonshot (domestic direct API)",
+        "moonshot-cn": "Moonshot (China domestic direct API)",
         "opencode-zen": "OpenCode Zen",
         "opencode-go": "OpenCode Go",
         "ai-gateway": "AI Gateway",

@@ -189,8 +189,6 @@ ALIASES: Dict[str, str] = {
     "kimi-coding": "kimi-for-coding",
 
     # moonshot
-    "moonshot": "moonshot",
-
     # minimax-cn
     "minimax-china": "minimax-cn",
     "minimax_cn": "minimax-cn",

@@ -2316,10 +2316,9 @@ _FALLBACK_COMMENT = """
 #   nous         (OAuth — hermes auth) — Nous Portal
 #   zai          (ZAI_API_KEY)         — Z.AI / GLM
 #   kimi-coding  (KIMI_API_KEY)        — Kimi / Moonshot
-#   moonshot     (MOONSHOT_API_KEY)    — Moonshot (global)
 #   minimax      (MINIMAX_API_KEY)     — MiniMax
 #   minimax-cn   (MINIMAX_CN_API_KEY)  — MiniMax (China)
-#   moonshot-cn  (MOONSHOT_CN_API_KEY) — Moonshot (domestic)
+#   moonshot-cn  (MOONSHOT_CN_API_KEY) — Moonshot (China domestic)
 #
 # For custom OpenAI-compatible endpoints, add base_url and api_key_env.
 #
@@ -2361,10 +2360,9 @@ _COMMENTED_SECTIONS = """
 #   nous         (OAuth — hermes auth) — Nous Portal
 #   zai          (ZAI_API_KEY)         — Z.AI / GLM
 #   kimi-coding  (KIMI_API_KEY)        — Kimi / Moonshot
-#   moonshot     (MOONSHOT_API_KEY)    — Moonshot (global)
 #   minimax      (MINIMAX_API_KEY)     — MiniMax
 #   minimax-cn   (MINIMAX_CN_API_KEY)  — MiniMax (China)
-#   moonshot-cn  (MOONSHOT_CN_API_KEY) — Moonshot (domestic)
+#   moonshot-cn  (MOONSHOT_CN_API_KEY) — Moonshot (China domestic)
 #
 # For custom OpenAI-compatible endpoints, add base_url and api_key_env.
 #
