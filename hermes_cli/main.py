@@ -1033,7 +1033,6 @@ def select_provider_and_model(args=None):
         "gemini": "Google AI Studio",
         "zai": "Z.AI / GLM",
         "kimi-coding": "Kimi / Moonshot",
-        "moonshot": "Kimi / Moonshot",
         "minimax": "MiniMax",
         "minimax-cn": "MiniMax (China)",
         "moonshot-cn": "Kimi / Moonshot (China)",
@@ -1069,7 +1068,6 @@ def select_provider_and_model(args=None):
         ("gemini", "Google AI Studio (Gemini models — OpenAI-compatible endpoint)"),
         ("zai", "Z.AI / GLM (Zhipu AI direct API)"),
         ("kimi-coding", "Kimi / Moonshot (Moonshot AI direct API)"),
-        ("moonshot", "Kimi / Moonshot"),
         ("minimax", "MiniMax (global direct API)"),
         ("minimax-cn", "MiniMax (China domestic direct API)"),
         ("moonshot-cn", "Kimi / Moonshot (China)"),
@@ -2402,7 +2400,7 @@ def _model_flow_kimi(config, current_model=""):
         ]
     else:
         # Legacy Moonshot models (excludes Coding Plan-only models)
-        model_list = _PROVIDER_MODELS.get("moonshot", [])
+        model_list = _PROVIDER_MODELS.get("kimi-coding", [])
 
     if model_list:
         selected = _prompt_model_selection(model_list, current_model=current_model)
@@ -4478,7 +4476,7 @@ For more help on a command:
     )
     chat_parser.add_argument(
         "--provider",
-        choices=["auto", "openrouter", "nous", "openai-codex", "copilot-acp", "copilot", "anthropic", "gemini", "huggingface", "zai", "kimi-coding", "moonshot", "minimax", "minimax-cn", "moonshot-cn", "kilocode", "xiaomi"],
+        choices=["auto", "openrouter", "nous", "openai-codex", "copilot-acp", "copilot", "anthropic", "gemini", "huggingface", "zai", "kimi-coding", "minimax", "minimax-cn", "moonshot-cn", "kilocode", "xiaomi"],
         default=None,
         help="Inference provider (default: auto)"
     )

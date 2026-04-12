@@ -157,12 +157,6 @@ _PROVIDER_MODELS: dict[str, list[str]] = {
         "kimi-k2-turbo-preview",
         "kimi-k2-0905-preview",
     ],
-    "moonshot": [
-        "kimi-k2.5",
-        "kimi-k2-thinking",
-        "kimi-k2-turbo-preview",
-        "kimi-k2-0905-preview",
-    ],
     "minimax": [
         "MiniMax-M2.7",
         "MiniMax-M2.5",
@@ -524,7 +518,6 @@ _PROVIDER_ALIASES = {
     "google-gemini": "gemini",
     "google-ai-studio": "gemini",
     "kimi": "kimi-coding",
-    "moonshot": "kimi-coding",
     "moonshot-china": "moonshot-cn",
     "minimax-china": "minimax-cn",
     "minimax_cn": "minimax-cn",

@@ -95,10 +95,6 @@ HERMES_OVERLAYS: Dict[str, HermesOverlay] = {
         transport="anthropic_messages",
         base_url_env_var="MINIMAX_CN_BASE_URL",
     ),
-    "moonshot": HermesOverlay(
-        transport="openai_chat",
-        base_url_env_var="MOONSHOT_BASE_URL",
-    ),
     "moonshot-cn": HermesOverlay(
         transport="openai_chat",
         base_url_env_var="MOONSHOT_CN_BASE_URL",

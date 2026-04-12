@@ -913,20 +913,7 @@ class TestZaiEndpointAutoDetect:
 # =============================================================================
 
 class TestKimiMoonshotModelListIsolation:
-    """Moonshot (legacy) users must not see Coding Plan-only models."""
-
-    def test_moonshot_list_excludes_coding_plan_only_models(self):
-        from hermes_cli.main import _PROVIDER_MODELS
-        moonshot_models = _PROVIDER_MODELS["moonshot"]
-        coding_plan_only = {"kimi-for-coding", "kimi-k2-thinking-turbo"}
-        leaked = set(moonshot_models) & coding_plan_only
-        assert not leaked, f"Moonshot list contains Coding Plan-only models: {leaked}"
-
-    def test_moonshot_list_contains_shared_models(self):
-        from hermes_cli.main import _PROVIDER_MODELS
-        moonshot_models = _PROVIDER_MODELS["moonshot"]
-        assert "kimi-k2.5" in moonshot_models
-        assert "kimi-k2-thinking" in moonshot_models
+    """Kimi-coding list contains Coding Plan-specific models."""
 
     def test_coding_plan_list_contains_plan_specific_models(self):
         from hermes_cli.main import _PROVIDER_MODELS

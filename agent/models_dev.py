@@ -146,7 +146,6 @@ PROVIDER_TO_MODELS_DEV: Dict[str, str] = {
     "anthropic": "anthropic",
     "zai": "zai",
     "kimi-coding": "kimi-for-coding",
-    "moonshot": "moonshot",
     "minimax": "minimax",
     "minimax-cn": "minimax-cn",
     "moonshot-cn": "moonshot-cn",

@@ -823,22 +823,6 @@ OPTIONAL_ENV_VARS = {
         "category": "provider",
         "advanced": True,
     },
-    "MOONSHOT_API_KEY": {
-        "description": "Moonshot API key (global endpoint)",
-        "prompt": "Moonshot API key",
-        "url": "https://platform.moonshot.ai/",
-        "password": True,
-        "category": "provider",
-        "advanced": True,
-    },
-    "MOONSHOT_BASE_URL": {
-        "description": "Moonshot base URL override",
-        "prompt": "Moonshot base URL (leave empty for default)",
-        "url": None,
-        "password": False,
-        "category": "provider",
-        "advanced": True,
-    },
     "MINIMAX_API_KEY": {
         "description": "MiniMax API key (international)",
         "prompt": "MiniMax API key",

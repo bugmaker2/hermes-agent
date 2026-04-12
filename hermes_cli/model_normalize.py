@@ -88,7 +88,6 @@ _AUTHORITATIVE_NATIVE_PROVIDERS: frozenset[str] = frozenset({
 _MATCHING_PREFIX_STRIP_PROVIDERS: frozenset[str] = frozenset({
     "zai",
     "kimi-coding",
-    "moonshot",
     "minimax",
     "minimax-cn",
     "moonshot-cn",

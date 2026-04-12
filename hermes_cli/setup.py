@@ -816,7 +816,6 @@ def setup_model_provider(config: dict, *, quick: bool = False):
             "copilot-acp": "GitHub Copilot ACP",
             "zai": "Z.AI / GLM",
             "kimi-coding": "Kimi / Moonshot",
-            "moonshot": "Kimi / Moonshot",
             "minimax": "MiniMax",
             "minimax-cn": "MiniMax CN",
             "moonshot-cn": "Kimi / Moonshot (China)",
