@@ -161,7 +161,7 @@ PROVIDER_REGISTRY: Dict[str, ProviderConfig] = {
     ),
     "moonshot": ProviderConfig(
         id="moonshot",
-        name="Moonshot (global direct API)",
+        name="Kimi / Moonshot",
         auth_type="api_key",
         inference_base_url="https://api.moonshot.ai/v1",
         api_key_env_vars=("MOONSHOT_API_KEY",),
@@ -200,7 +200,7 @@ PROVIDER_REGISTRY: Dict[str, ProviderConfig] = {
     ),
     "moonshot-cn": ProviderConfig(
         id="moonshot-cn",
-        name="Moonshot (domestic direct API)",
+        name="Kimi / Moonshot (China)",
         auth_type="api_key",
         inference_base_url="https://api.moonshot.cn/v1",
         api_key_env_vars=("MOONSHOT_CN_API_KEY",),

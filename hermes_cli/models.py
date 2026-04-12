@@ -495,7 +495,7 @@ _PROVIDER_LABELS = {
     "kimi-coding": "Kimi / Moonshot",
     "minimax": "MiniMax",
     "minimax-cn": "MiniMax (China)",
-    "moonshot-cn": "Moonshot (China domestic direct API)",
+    "moonshot-cn": "Kimi / Moonshot (China)",
     "anthropic": "Anthropic",
     "deepseek": "DeepSeek",
     "opencode-zen": "OpenCode Zen",
