@@ -1033,8 +1033,10 @@ def select_provider_and_model(args=None):
         "gemini": "Google AI Studio",
         "zai": "Z.AI / GLM",
         "kimi-coding": "Kimi / Moonshot",
+        "moonshot": "Moonshot (global direct API)",
         "minimax": "MiniMax",
         "minimax-cn": "MiniMax (China)",
+        "moonshot-cn": "Moonshot (domestic direct API)",
         "opencode-zen": "OpenCode Zen",
         "opencode-go": "OpenCode Go",
         "ai-gateway": "AI Gateway",
@@ -1067,8 +1069,10 @@ def select_provider_and_model(args=None):
         ("gemini", "Google AI Studio (Gemini models — OpenAI-compatible endpoint)"),
         ("zai", "Z.AI / GLM (Zhipu AI direct API)"),
         ("kimi-coding", "Kimi / Moonshot (Moonshot AI direct API)"),
+        ("moonshot", "Moonshot (global direct API)"),
         ("minimax", "MiniMax (global direct API)"),
-        ("minimax-cn", "MiniMax China (domestic direct API)"),
+        ("minimax-cn", "MiniMax (China domestic direct API)"),
+        ("moonshot-cn", "Moonshot (China domestic direct API)"),
         ("kilocode", "Kilo Code (Kilo Gateway API)"),
         ("opencode-zen", "OpenCode Zen (35+ curated models, pay-as-you-go)"),
         ("opencode-go", "OpenCode Go (open models, $10/month subscription)"),
@@ -4474,7 +4478,7 @@ For more help on a command:
     )
     chat_parser.add_argument(
         "--provider",
-        choices=["auto", "openrouter", "nous", "openai-codex", "copilot-acp", "copilot", "anthropic", "gemini", "huggingface", "zai", "kimi-coding", "minimax", "minimax-cn", "kilocode", "xiaomi"],
+        choices=["auto", "openrouter", "nous", "openai-codex", "copilot-acp", "copilot", "anthropic", "gemini", "huggingface", "zai", "kimi-coding", "moonshot", "minimax", "minimax-cn", "moonshot-cn", "kilocode", "xiaomi"],
         default=None,
         help="Inference provider (default: auto)"
     )

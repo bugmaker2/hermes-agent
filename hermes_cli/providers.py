@@ -95,6 +95,14 @@ HERMES_OVERLAYS: Dict[str, HermesOverlay] = {
         transport="anthropic_messages",
         base_url_env_var="MINIMAX_CN_BASE_URL",
     ),
+    "moonshot": HermesOverlay(
+        transport="openai_chat",
+        base_url_env_var="MOONSHOT_BASE_URL",
+    ),
+    "moonshot-cn": HermesOverlay(
+        transport="openai_chat",
+        base_url_env_var="MOONSHOT_CN_BASE_URL",
+    ),
     "deepseek": HermesOverlay(
         transport="openai_chat",
         base_url_env_var="DEEPSEEK_BASE_URL",
@@ -179,11 +187,16 @@ ALIASES: Dict[str, str] = {
     # kimi-for-coding (models.dev ID)
     "kimi": "kimi-for-coding",
     "kimi-coding": "kimi-for-coding",
-    "moonshot": "kimi-for-coding",
+
+    # moonshot
+    "moonshot": "moonshot",
 
     # minimax-cn
     "minimax-china": "minimax-cn",
     "minimax_cn": "minimax-cn",
+
+    # moonshot-cn
+    "moonshot-china": "moonshot-cn",
 
     # anthropic
     "claude": "anthropic",

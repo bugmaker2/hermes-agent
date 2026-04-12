@@ -238,10 +238,12 @@ def show_status(args):
     print(color("◆ API-Key Providers", Colors.CYAN, Colors.BOLD))
 
     apikey_providers = {
-        "Z.AI / GLM":       ("GLM_API_KEY", "ZAI_API_KEY", "Z_AI_API_KEY"),
-        "Kimi / Moonshot":  ("KIMI_API_KEY",),
-        "MiniMax":          ("MINIMAX_API_KEY",),
-        "MiniMax (China)":  ("MINIMAX_CN_API_KEY",),
+        "Z.AI / GLM":             ("GLM_API_KEY", "ZAI_API_KEY", "Z_AI_API_KEY"),
+        "Kimi / Moonshot":        ("KIMI_API_KEY",),
+        "Moonshot (global)":      ("MOONSHOT_API_KEY",),
+        "MiniMax":                ("MINIMAX_API_KEY",),
+        "MiniMax (China)":        ("MINIMAX_CN_API_KEY",),
+        "Moonshot (domestic)":    ("MOONSHOT_CN_API_KEY",),
     }
     for pname, env_vars in apikey_providers.items():
         key_val = ""

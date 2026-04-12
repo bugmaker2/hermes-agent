@@ -159,6 +159,14 @@ PROVIDER_REGISTRY: Dict[str, ProviderConfig] = {
         api_key_env_vars=("KIMI_API_KEY",),
         base_url_env_var="KIMI_BASE_URL",
     ),
+    "moonshot": ProviderConfig(
+        id="moonshot",
+        name="Moonshot (global direct API)",
+        auth_type="api_key",
+        inference_base_url="https://api.moonshot.ai/v1",
+        api_key_env_vars=("MOONSHOT_API_KEY",),
+        base_url_env_var="MOONSHOT_BASE_URL",
+    ),
     "minimax": ProviderConfig(
         id="minimax",
         name="MiniMax",
@@ -189,6 +197,14 @@ PROVIDER_REGISTRY: Dict[str, ProviderConfig] = {
         inference_base_url="https://api.minimaxi.com/anthropic",
         api_key_env_vars=("MINIMAX_CN_API_KEY",),
         base_url_env_var="MINIMAX_CN_BASE_URL",
+    ),
+    "moonshot-cn": ProviderConfig(
+        id="moonshot-cn",
+        name="Moonshot (domestic direct API)",
+        auth_type="api_key",
+        inference_base_url="https://api.moonshot.cn/v1",
+        api_key_env_vars=("MOONSHOT_CN_API_KEY",),
+        base_url_env_var="MOONSHOT_CN_BASE_URL",
     ),
     "deepseek": ProviderConfig(
         id="deepseek",
@@ -930,6 +946,7 @@ def resolve_provider(
         "google": "gemini", "google-gemini": "gemini", "google-ai-studio": "gemini",
         "kimi": "kimi-coding", "kimi-for-coding": "kimi-coding", "moonshot": "kimi-coding",
         "minimax-china": "minimax-cn", "minimax_cn": "minimax-cn",
+        "moonshot-china": "moonshot-cn", "moonshot-cn-coding": "moonshot-cn",
         "claude": "anthropic", "claude-code": "anthropic",
         "github": "copilot", "github-copilot": "copilot",
         "github-models": "copilot", "github-model": "copilot",
