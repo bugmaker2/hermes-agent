@@ -312,7 +312,11 @@ class TestPluginHooks:
 
 
 class TestPreToolCallBlocking:
-    """Tests for the pre_tool_call block directive helper."""
+    """Tests for get_pre_tool_call_block_message (hook return validation).
+
+    Integration with handle_function_call / AIAgent lives in tests for
+    ``model_tools`` and ``run_agent``.
+    """
 
     def test_block_message_returned_for_valid_directive(self, monkeypatch):
         monkeypatch.setattr(

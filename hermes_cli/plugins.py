@@ -52,6 +52,8 @@ logger = logging.getLogger(__name__)
 # ---------------------------------------------------------------------------
 
 VALID_HOOKS: Set[str] = {
+    # pre_tool_call: observer callbacks may also return {"action": "block", "message": "..."};
+    # see get_pre_tool_call_block_message (automatic policy, not interactive approval).
     "pre_tool_call",
     "post_tool_call",
     "pre_llm_call",
@@ -601,6 +603,11 @@ def get_pre_tool_call_block_message(
     from their ``pre_tool_call`` callback.  The first valid block
     directive wins.  Invalid or irrelevant hook return values are
     silently ignored so existing observer-only hooks are unaffected.
+
+    This path is separate from interactive dangerous-command approval
+    (``tools/approval.py``): blocking here is synchronous plugin policy
+    (e.g. per-session gateway rules, budgets) with the reason returned
+    as a tool error for the model.
     """
     hook_results = invoke_hook(
         "pre_tool_call",

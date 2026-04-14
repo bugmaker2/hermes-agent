@@ -6890,7 +6890,9 @@ class AIAgent:
         tools. Used by the concurrent execution path; the sequential path retains
         its own inline invocation for backward-compatible display handling.
         """
-        # Check plugin hooks for a block directive before executing anything.
+        # Plugin policy: block before agent-level tools or registry dispatch.
+        # Registry calls use handle_function_call(..., skip_pre_tool_call_hook=True)
+        # so hooks still fire for observers but blocking is not evaluated twice.
         block_message: Optional[str] = None
         try:
             from hermes_cli.plugins import get_pre_tool_call_block_message
@@ -7205,7 +7207,8 @@ class AIAgent:
             if not isinstance(function_args, dict):
                 function_args = {}
 
-            # Check plugin hooks for a block directive before executing.
+            # Plugin policy: block before counters, checkpoints, and UI callbacks.
+            # Model still receives a tool message with {"error": "<reason>"}.
             _block_msg: Optional[str] = None
             try:
                 from hermes_cli.plugins import get_pre_tool_call_block_message

@@ -478,6 +478,11 @@ def handle_function_call(
                        execute_code uses this list to determine which sandbox
                        tools to generate.  Falls back to the process-global
                        ``_last_resolved_tool_names`` for backward compat.
+        skip_pre_tool_call_hook: When False (default), ``pre_tool_call`` hooks
+            may block execution via ``get_pre_tool_call_block_message``. When
+            True, the caller already enforced blocking (e.g. ``AIAgent._invoke_tool``);
+            ``pre_tool_call`` still runs once for observers without a second
+            block check.
 
     Returns:
         Function result as a JSON string.

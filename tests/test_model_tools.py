@@ -92,11 +92,11 @@ class TestAgentLoopTools:
 
 
 # =========================================================================
-# Pre-tool-call blocking via plugin hooks
+# Pre-tool-call blocking via plugin hooks (policy JSON on pre_tool_call)
 # =========================================================================
 
 class TestPreToolCallBlocking:
-    """Verify that pre_tool_call hooks can block tool execution."""
+    """handle_function_call: block skips dispatch, read-loop notify, and re-check when skipped."""
 
     def test_blocked_tool_returns_error_and_skips_dispatch(self, monkeypatch):
         def fake_invoke_hook(hook_name, **kwargs):
