@@ -27,27 +27,28 @@ export default function App() {
 
   return (
     <div className="relative flex min-h-screen flex-col bg-background text-foreground overflow-x-hidden">
-      {/* Ambient background orbs */}
+      {/* Ambient background orbs — Nous blue palette */}
       <div className="bg-orbs" aria-hidden="true">
         <div className="bg-orb bg-orb-1" />
         <div className="bg-orb bg-orb-2" />
         <div className="bg-orb bg-orb-3" />
       </div>
 
-      {/* Noise + warm glow overlays */}
+      {/* Subtle noise grain overlay */}
       <div className="noise-overlay" />
       <div className="warm-glow" />
 
       {/* Fixed header with glass effect */}
       <header className="fixed top-0 left-0 right-0 z-40 glass border-b border-glass-border">
         <div className="mx-auto flex h-12 max-w-[1400px] items-stretch">
-          {/* Brand */}
+
+          {/* Brand — compact terminal mark */}
           <div className="flex items-center border-r border-glass-border px-3 sm:px-5 shrink-0 group">
-            <span className="font-collapse text-lg sm:text-xl font-bold tracking-wider uppercase blend-lighter transition-all duration-300 group-hover:text-glow">
-              H<span className="hidden sm:inline">ermes </span>A<span className="hidden sm:inline">gent</span>
+            <span className="font-collapse text-base sm:text-lg font-bold tracking-[0.15em] uppercase text-foreground/70 group-hover:text-foreground transition-colors duration-200">
+              H<span className="hidden sm:inline">ermes</span>
             </span>
-            {/* Live indicator dot */}
-            <span className="ml-2 h-1.5 w-1.5 rounded-full bg-success pulse-glow" />
+            {/* Live indicator dot — Nous blue */}
+            <span className="ml-2 h-1.5 w-1.5 rounded-full bg-[#3050FF] pulse-glow" />
           </div>
 
           {/* Navigation */}
@@ -71,9 +72,9 @@ export default function App() {
                     <span className="hidden sm:inline">{t.app.nav[labelKey]}</span>
                     {/* Hover glow effect */}
                     <span className="absolute inset-0 bg-foreground pointer-events-none transition-opacity duration-150 group-hover:opacity-5 opacity-0" />
-                    {/* Active indicator — animated accent line */}
+                    {/* Active indicator — Nous blue accent line */}
                     {isActive && (
-                      <span className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-warning to-transparent" />
+                      <span className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#3050FF] to-transparent" />
                     )}
                   </>
                 )}
@@ -84,7 +85,7 @@ export default function App() {
           {/* Header actions */}
           <div className="ml-auto flex items-center gap-2 px-2 sm:px-4">
             <LanguageSwitcher />
-            <span className="hidden sm:inline font-display text-[0.7rem] tracking-[0.15em] uppercase opacity-50">
+            <span className="hidden sm:inline font-display text-[0.7rem] tracking-[0.15em] uppercase opacity-40">
               {t.app.webUi}
             </span>
           </div>
@@ -111,10 +112,10 @@ export default function App() {
       {/* Footer */}
       <footer className="relative z-2 glass border-t border-glass-border">
         <div className="mx-auto flex max-w-[1400px] items-center justify-between px-3 sm:px-6 py-3">
-          <span className="font-display text-[0.7rem] sm:text-[0.8rem] tracking-[0.12em] uppercase opacity-50">
+          <span className="font-display text-[0.7rem] sm:text-[0.8rem] tracking-[0.12em] uppercase opacity-40">
             {t.app.footer.name}
           </span>
-          <span className="font-display text-[0.6rem] sm:text-[0.7rem] tracking-[0.15em] uppercase text-foreground/40">
+          <span className="font-display text-[0.6rem] sm:text-[0.7rem] tracking-[0.15em] uppercase text-foreground/30">
             {t.app.footer.org}
           </span>
         </div>

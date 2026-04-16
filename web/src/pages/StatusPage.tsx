@@ -187,7 +187,7 @@ export default function StatusPage() {
               <div
                 key={s.id}
                 className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 rounded-sm p-3 hover-lift transition-all duration-200"
-                style={{ background: "rgba(74, 222, 128, 0.04)", border: "1px solid rgba(74, 222, 128, 0.15)" }}
+                style={{ background: "rgba(74, 222, 128, 0.04)", border: "1px solid rgba(74, 222, 128, 0.10)" }}
               >
                 <div className="flex flex-col gap-1 min-w-0 w-full">
                   <div className="flex items-center gap-2">
