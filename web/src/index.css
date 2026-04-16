@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 /* ------------------------------------------------------------------ */
-/* Hermes Agent — Design tokens                                        */
-/* Matched to hermes-agent.nousresearch.com (dark teal theme)          */
+/* Hermes Agent — Redesigned Web UI                                    */
+/* Modern Hermes aesthetic: glassmorphism, gradient borders, orbs      */
 /* ------------------------------------------------------------------ */
 
 /* --- Font faces --- */
@@ -39,6 +39,18 @@
   --color-ring: #ffe6cb;
   --color-popover: #062424;
   --color-popover-foreground: #ffe6cb;
+
+  /* ---- Glassmorphism surface ---- */
+  --color-glass: color-mix(in srgb, #062424 70%, transparent);
+  --color-glass-border: color-mix(in srgb, #ffe6cb 12%, transparent);
+  --color-glass-highlight: color-mix(in srgb, #ffe6cb 8%, transparent);
+
+  /* ---- Gradient accent colors ---- */
+  --color-gradient-start: #ffe6cb;
+  --color-gradient-end: #ff9d38;
+  --color-orb-1: rgba(255, 189, 56, 0.08);
+  --color-orb-2: rgba(74, 222, 128, 0.05);
+  --color-orb-3: rgba(255, 189, 56, 0.04);
 
   /* ---- Font stacks ---- */
   --font-sans: "Mondwest", Arial, sans-serif;
@@ -104,12 +116,216 @@ code {
   background: color-mix(in srgb, var(--color-foreground) 8%, transparent);
 }
 
-/* ---- Dither texture ---- */
-.dither {
-  background: repeating-conic-gradient(currentColor 0% 25%, #0000 0% 50%) 0 0 / 2px 2px;
+/* ---- Font utilities ---- */
+.font-display { font-family: "Mondwest", Arial, sans-serif; }
+.font-expanded { font-family: "RulesExpanded", Arial, sans-serif; }
+.font-compressed { font-family: "RulesCompressed", Arial, sans-serif; }
+.font-courier { font-family: "Courier Prime", "Courier New", monospace; }
+.font-collapse { font-family: "Collapse", Arial, sans-serif; }
+.font-mono-ui { font-family: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, monospace; }
+
+/* ------------------------------------------------------------------ */
+/*  AMBIENT BACKGROUND ORBS                                            */
+/* ------------------------------------------------------------------ */
+
+.bg-orbs {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
 }
 
-/* ---- Blink cursor (only on group hover, like canonical) ---- */
+.bg-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  animation: orb-float 20s ease-in-out infinite;
+}
+
+.bg-orb-1 {
+  width: 600px;
+  height: 600px;
+  top: -200px;
+  left: -200px;
+  background: radial-gradient(circle, rgba(255,189,56,0.12) 0%, transparent 70%);
+  animation-delay: 0s;
+}
+
+.bg-orb-2 {
+  width: 500px;
+  height: 500px;
+  bottom: -150px;
+  right: -150px;
+  background: radial-gradient(circle, rgba(74,222,128,0.06) 0%, transparent 70%);
+  animation-delay: -7s;
+}
+
+.bg-orb-3 {
+  width: 400px;
+  height: 400px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(255,189,56,0.04) 0%, transparent 70%);
+  animation-delay: -14s;
+}
+
+@keyframes orb-float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(30px, -20px) scale(1.05); }
+  50% { transform: translate(-20px, 30px) scale(0.95); }
+  75% { transform: translate(20px, 20px) scale(1.02); }
+}
+
+/* ------------------------------------------------------------------ */
+/*  GRADIENT BORDERS                                                  */
+/* ------------------------------------------------------------------ */
+
+.gradient-border {
+  position: relative;
+  border: 1px solid var(--color-glass-border);
+}
+
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 189, 56, 0.4) 0%,
+    rgba(255, 157, 56, 0.1) 30%,
+    rgba(74, 222, 128, 0.05) 60%,
+    rgba(255, 189, 56, 0.3) 100%
+  );
+  background-size: 200% 200%;
+  animation: gradient-shift 8s ease infinite;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.gradient-border-glow {
+  position: relative;
+}
+
+.gradient-border-glow::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, var(--color-gradient-start), var(--color-gradient-end));
+  opacity: 0;
+  filter: blur(12px);
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.gradient-border-glow:hover::after {
+  opacity: 0.15;
+}
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* ------------------------------------------------------------------ */
+/*  GLASSMORPHISM                                                     */
+/* ------------------------------------------------------------------ */
+
+.glass {
+  background: rgba(6, 36, 36, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--color-glass-border);
+}
+
+.glass-strong {
+  background: rgba(6, 36, 36, 0.8);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--color-glass-border);
+}
+
+.glass-highlight {
+  background: linear-gradient(
+    135deg,
+    var(--color-glass-highlight) 0%,
+    transparent 50%,
+    var(--color-glass-highlight) 100%
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  SHIMMER LOADING                                                   */
+/* ------------------------------------------------------------------ */
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 230, 203, 0.08) 40%,
+    rgba(255, 230, 203, 0.15) 50%,
+    rgba(255, 230, 203, 0.08) 60%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s ease-in-out infinite;
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(8, 48, 48, 0.8) 0%,
+    rgba(10, 46, 46, 0.9) 40%,
+    rgba(8, 48, 48, 0.8) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2.5s ease-in-out infinite;
+}
+
+/* ------------------------------------------------------------------ */
+/*  PULSE & GLOW ANIMATIONS                                           */
+/* ------------------------------------------------------------------ */
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(255, 189, 56, 0);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(255, 189, 56, 0.15);
+  }
+}
+
+.pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+@keyframes ring-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.ring-pulse {
+  animation: ring-pulse 2s ease-in-out infinite;
+}
+
+/* ------------------------------------------------------------------ */
+/*  BLINK CURSOR                                                      */
+/* ------------------------------------------------------------------ */
+
 @keyframes blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
@@ -122,37 +338,71 @@ code {
   animation: blink 1s step-end infinite;
 }
 
-/* ---- Page transitions ---- */
+/* ------------------------------------------------------------------ */
+/*  PAGE TRANSITIONS                                                  */
+/* ------------------------------------------------------------------ */
+
 @keyframes fade-in {
-  from { opacity: 0; transform: translateY(4px); }
+  from { opacity: 0; transform: translateY(6px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-@keyframes toast-in {
-  from { opacity: 0; transform: translateX(16px); }
-  to   { opacity: 1; transform: translateX(0); }
-}
-@keyframes toast-out {
-  from { opacity: 1; transform: translateX(0); }
-  to   { opacity: 0; transform: translateX(16px); }
+
+@keyframes fade-in-scale {
+  from { opacity: 0; transform: scale(0.97); }
+  to   { opacity: 1; transform: scale(1); }
 }
 
-/* ---- Plus-lighter blend for headings ---- */
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.page-enter {
+  animation: fade-in 0.3s ease-out forwards;
+}
+
+.page-enter-scale {
+  animation: fade-in-scale 0.25s ease-out forwards;
+}
+
+/* ------------------------------------------------------------------ */
+/*  TOAST ANIMATIONS                                                  */
+/* ------------------------------------------------------------------ */
+
+@keyframes toast-in {
+  from { opacity: 0; transform: translateX(20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes toast-out {
+  from { opacity: 1; transform: translateX(0); }
+  to   { opacity: 0; transform: translateX(20px); }
+}
+
+/* ------------------------------------------------------------------ */
+/*  PLUS-LIGHTER BLEND                                                */
+/* ------------------------------------------------------------------ */
+
 .blend-lighter {
   mix-blend-mode: plus-lighter;
 }
 
-/* ---- Font utilities ---- */
-.font-display { font-family: "Mondwest", Arial, sans-serif; }
-.font-expanded { font-family: "RulesExpanded", Arial, sans-serif; }
-.font-compressed { font-family: "RulesCompressed", Arial, sans-serif; }
-.font-courier { font-family: "Courier Prime", "Courier New", monospace; }
-.font-collapse { font-family: "Collapse", Arial, sans-serif; }
-.font-mono-ui { font-family: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, monospace; }
+/* ------------------------------------------------------------------ */
+/*  DITHER TEXTURE                                                    */
+/* ------------------------------------------------------------------ */
 
-/* ---- Subtle grain overlay for badges ---- */
+.dither {
+  background: repeating-conic-gradient(currentColor 0% 25%, #0000 0% 50%) 0 0 / 2px 2px;
+}
+
+/* ------------------------------------------------------------------ */
+/*  GRAIN TEXTURE                                                     */
+/* ------------------------------------------------------------------ */
+
 .grain {
   position: relative;
 }
+
 .grain::after {
   content: "";
   position: absolute;
@@ -162,7 +412,10 @@ code {
   background: repeating-conic-gradient(currentColor 0% 25%, #0000 0% 50%) 0 0 / 2px 2px;
 }
 
-/* ---- Global noise grain (canonical: color-dodge, #eaeaea, high density) ---- */
+/* ------------------------------------------------------------------ */
+/*  GLOBAL NOISE GRAIN                                                */
+/* ------------------------------------------------------------------ */
+
 .noise-overlay {
   pointer-events: none;
   position: fixed;
@@ -174,7 +427,10 @@ code {
   background-size: 512px 512px;
 }
 
-/* ---- Vignette (canonical: top-left amber radial, lighten blend) ---- */
+/* ------------------------------------------------------------------ */
+/*  WARM GLOW VIGNETTE                                                */
+/* ------------------------------------------------------------------ */
+
 .warm-glow {
   pointer-events: none;
   position: fixed;
@@ -185,7 +441,87 @@ code {
   background: radial-gradient(ellipse at 0% 0%, rgba(255,189,56,0.35) 0%, rgba(255,189,56,0) 60%);
 }
 
-/* ---- Reduced motion ---- */
+/* ------------------------------------------------------------------ */
+/*  INTERACTIVE HOVER EFFECTS                                         */
+/* ------------------------------------------------------------------ */
+
+.hover-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.hover-glow {
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 20px rgba(255, 189, 56, 0.1);
+  border-color: rgba(255, 189, 56, 0.3);
+}
+
+/* ------------------------------------------------------------------ */
+/*  STAGGER ANIMATION UTILITIES                                       */
+/* ------------------------------------------------------------------ */
+
+.stagger-1 { animation-delay: 0ms; }
+.stagger-2 { animation-delay: 100ms; }
+.stagger-3 { animation-delay: 200ms; }
+.stagger-4 { animation-delay: 300ms; }
+.stagger-5 { animation-delay: 400ms; }
+
+/* ------------------------------------------------------------------ */
+/*  GLOW TEXT EFFECT                                                  */
+/* ------------------------------------------------------------------ */
+
+.text-glow {
+  text-shadow: 0 0 20px rgba(255, 189, 56, 0.4);
+}
+
+.text-glow-strong {
+  text-shadow: 0 0 30px rgba(255, 189, 56, 0.6), 0 0 60px rgba(255, 189, 56, 0.2);
+}
+
+/* ------------------------------------------------------------------ */
+/*  ACCENT LINE                                                       */
+/* ------------------------------------------------------------------ */
+
+@keyframes accent-line {
+  0% { transform: scaleX(0); transform-origin: left; }
+  50% { transform: scaleX(1); transform-origin: left; }
+  51% { transform-origin: right; }
+  100% { transform: scaleX(0); transform-origin: right; }
+}
+
+.accent-line::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-gradient-start), transparent);
+}
+
+/* ------------------------------------------------------------------ */
+/*  SPINNER                                                           */
+/* ------------------------------------------------------------------ */
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+/* ------------------------------------------------------------------ */
+/*  REDUCED MOTION                                                    */
+/* ------------------------------------------------------------------ */
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

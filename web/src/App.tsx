@@ -26,18 +26,31 @@ export default function App() {
   const { t } = useI18n();
 
   return (
-    <div className="flex min-h-screen flex-col bg-background text-foreground overflow-x-hidden">
+    <div className="relative flex min-h-screen flex-col bg-background text-foreground overflow-x-hidden">
+      {/* Ambient background orbs */}
+      <div className="bg-orbs" aria-hidden="true">
+        <div className="bg-orb bg-orb-1" />
+        <div className="bg-orb bg-orb-2" />
+        <div className="bg-orb bg-orb-3" />
+      </div>
+
+      {/* Noise + warm glow overlays */}
       <div className="noise-overlay" />
       <div className="warm-glow" />
 
-      <header className="fixed top-0 left-0 right-0 z-40 border-b border-border bg-background/90 backdrop-blur-sm">
+      {/* Fixed header with glass effect */}
+      <header className="fixed top-0 left-0 right-0 z-40 glass border-b border-glass-border">
         <div className="mx-auto flex h-12 max-w-[1400px] items-stretch">
-          <div className="flex items-center border-r border-border px-3 sm:px-5 shrink-0">
-            <span className="font-collapse text-lg sm:text-xl font-bold tracking-wider uppercase blend-lighter">
+          {/* Brand */}
+          <div className="flex items-center border-r border-glass-border px-3 sm:px-5 shrink-0 group">
+            <span className="font-collapse text-lg sm:text-xl font-bold tracking-wider uppercase blend-lighter transition-all duration-300 group-hover:text-glow">
               H<span className="hidden sm:inline">ermes </span>A<span className="hidden sm:inline">gent</span>
             </span>
+            {/* Live indicator dot */}
+            <span className="ml-2 h-1.5 w-1.5 rounded-full bg-success pulse-glow" />
           </div>
 
+          {/* Navigation */}
           <nav className="flex items-stretch overflow-x-auto scrollbar-none">
             {NAV_ITEMS.map(({ path, labelKey, icon: Icon }) => (
               <NavLink
@@ -45,7 +58,7 @@ export default function App() {
                 to={path}
                 end={path === "/"}
                 className={({ isActive }) =>
-                  `group relative inline-flex items-center gap-1 sm:gap-1.5 border-r border-border px-2.5 sm:px-4 py-2 font-display text-[0.65rem] sm:text-[0.8rem] tracking-[0.12em] uppercase whitespace-nowrap transition-colors cursor-pointer shrink-0 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring ${
+                  `group relative inline-flex items-center gap-1 sm:gap-1.5 border-r border-glass-border px-2.5 sm:px-4 py-2 font-display text-[0.65rem] sm:text-[0.8rem] tracking-[0.12em] uppercase whitespace-nowrap transition-all duration-200 cursor-pointer shrink-0 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring hover-lift ${
                     isActive
                       ? "text-foreground"
                       : "text-muted-foreground hover:text-foreground"
@@ -56,9 +69,11 @@ export default function App() {
                   <>
                     <Icon className="h-4 w-4 sm:h-3.5 sm:w-3.5 shrink-0" />
                     <span className="hidden sm:inline">{t.app.nav[labelKey]}</span>
+                    {/* Hover glow effect */}
                     <span className="absolute inset-0 bg-foreground pointer-events-none transition-opacity duration-150 group-hover:opacity-5 opacity-0" />
+                    {/* Active indicator — animated accent line */}
                     {isActive && (
-                      <span className="absolute bottom-0 left-0 right-0 h-px bg-foreground" />
+                      <span className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-warning to-transparent" />
                     )}
                   </>
                 )}
@@ -66,6 +81,7 @@ export default function App() {
             ))}
           </nav>
 
+          {/* Header actions */}
           <div className="ml-auto flex items-center gap-2 px-2 sm:px-4">
             <LanguageSwitcher />
             <span className="hidden sm:inline font-display text-[0.7rem] tracking-[0.15em] uppercase opacity-50">
@@ -75,21 +91,25 @@ export default function App() {
         </div>
       </header>
 
+      {/* Main content */}
       <main className="relative z-2 mx-auto w-full max-w-[1400px] flex-1 px-3 sm:px-6 pt-16 sm:pt-20 pb-4 sm:pb-8">
-        <Routes>
-          <Route path="/" element={<StatusPage />} />
-          <Route path="/sessions" element={<SessionsPage />} />
-          <Route path="/analytics" element={<AnalyticsPage />} />
-          <Route path="/logs" element={<LogsPage />} />
-          <Route path="/cron" element={<CronPage />} />
-          <Route path="/skills" element={<SkillsPage />} />
-          <Route path="/config" element={<ConfigPage />} />
-          <Route path="/env" element={<EnvPage />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
+        <div className="page-enter">
+          <Routes>
+            <Route path="/" element={<StatusPage />} />
+            <Route path="/sessions" element={<SessionsPage />} />
+            <Route path="/analytics" element={<AnalyticsPage />} />
+            <Route path="/logs" element={<LogsPage />} />
+            <Route path="/cron" element={<CronPage />} />
+            <Route path="/skills" element={<SkillsPage />} />
+            <Route path="/config" element={<ConfigPage />} />
+            <Route path="/env" element={<EnvPage />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </div>
       </main>
 
-      <footer className="relative z-2 border-t border-border">
+      {/* Footer */}
+      <footer className="relative z-2 glass border-t border-glass-border">
         <div className="mx-auto flex max-w-[1400px] items-center justify-between px-3 sm:px-6 py-3">
           <span className="font-display text-[0.7rem] sm:text-[0.8rem] tracking-[0.12em] uppercase opacity-50">
             {t.app.footer.name}

@@ -33,8 +33,17 @@ export default function StatusPage() {
 
   if (!status) {
     return (
-      <div className="flex items-center justify-center py-24">
-        <div className="h-6 w-6 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+      <div className="flex flex-col items-center justify-center py-24 gap-4">
+        {/* Shimmer skeleton */}
+        <div className="flex flex-col gap-4 w-full max-w-sm">
+          <div className="skeleton h-28 w-full rounded-sm" />
+          <div className="grid grid-cols-3 gap-4">
+            <div className="skeleton h-24 w-full rounded-sm" />
+            <div className="skeleton h-24 w-full rounded-sm" />
+            <div className="skeleton h-24 w-full rounded-sm" />
+          </div>
+        </div>
+        <div className="h-4 w-4 rounded-full shimmer" />
       </div>
     );
   }
@@ -116,9 +125,9 @@ export default function StatusPage() {
 
   return (
     <div className="flex flex-col gap-6">
-      {/* Alert banner — breaks grid monotony for critical states */}
+      {/* Alert banner — gradient border */}
       {alerts.length > 0 && (
-        <div className="border border-destructive/30 bg-destructive/[0.06] p-4">
+        <div className="gradient-border rounded-sm p-4">
           <div className="flex items-start gap-3">
             <AlertTriangle className="h-5 w-5 text-destructive shrink-0 mt-0.5" />
             <div className="flex flex-col gap-2 min-w-0">
@@ -135,9 +144,10 @@ export default function StatusPage() {
         </div>
       )}
 
+      {/* Status cards with gradient border glow */}
       <div className="grid gap-4 sm:grid-cols-3">
         {items.map(({ icon: Icon, label, value, badgeText, badgeVariant }) => (
-          <Card key={label}>
+          <Card key={label} className="hover-lift">
             <CardHeader className="flex flex-row items-center justify-between pb-2">
               <CardTitle className="text-sm font-medium">{label}</CardTitle>
               <Icon className="h-4 w-4 text-muted-foreground" />
@@ -149,7 +159,7 @@ export default function StatusPage() {
               {badgeText && (
                 <Badge variant={badgeVariant} className="mt-2">
                   {badgeVariant === "success" && (
-                    <span className="mr-1 inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-current" />
+                    <span className="mr-1 inline-block h-1.5 w-1.5 rounded-full bg-current pulse-glow" />
                   )}
                   {badgeText}
                 </Badge>
@@ -176,14 +186,15 @@ export default function StatusPage() {
             {activeSessions.map((s) => (
               <div
                 key={s.id}
-                className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 border border-border p-3 w-full"
+                className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 rounded-sm p-3 hover-lift transition-all duration-200"
+                style={{ background: "rgba(74, 222, 128, 0.04)", border: "1px solid rgba(74, 222, 128, 0.15)" }}
               >
                 <div className="flex flex-col gap-1 min-w-0 w-full">
                   <div className="flex items-center gap-2">
                     <span className="font-medium text-sm truncate">{s.title ?? t.common.untitled}</span>
 
                     <Badge variant="success" className="text-[10px] shrink-0">
-                      <span className="mr-1 inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-current" />
+                      <span className="mr-1 inline-block h-1.5 w-1.5 rounded-full bg-current pulse-glow" />
                       {t.common.live}
                     </Badge>
                   </div>
@@ -211,7 +222,7 @@ export default function StatusPage() {
             {recentSessions.map((s) => (
               <div
                 key={s.id}
-                className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 border border-border p-3 w-full"
+                className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 rounded-sm p-3 hover-lift transition-all duration-200"
               >
                 <div className="flex flex-col gap-1 min-w-0 w-full">
                   <span className="font-medium text-sm truncate">{s.title ?? t.common.untitled}</span>
@@ -263,7 +274,7 @@ function PlatformsCard({ platforms, platformStateBadge }: PlatformsCardProps) {
           return (
             <div
               key={name}
-              className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 border border-border p-3 w-full"
+              className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 rounded-sm p-3 hover-lift transition-all duration-200"
             >
               <div className="flex items-center gap-3 min-w-0 w-full">
                 <IconComponent className={`h-4 w-4 shrink-0 ${
@@ -291,7 +302,7 @@ function PlatformsCard({ platforms, platformStateBadge }: PlatformsCardProps) {
 
               <Badge variant={display.variant} className="shrink-0 self-start sm:self-center">
                 {display.variant === "success" && (
-                  <span className="mr-1 inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-current" />
+                  <span className="mr-1 inline-block h-1.5 w-1.5 rounded-full bg-current pulse-glow" />
                 )}
                 {display.label}
               </Badge>

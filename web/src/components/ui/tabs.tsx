@@ -18,7 +18,7 @@ export function TabsList({ className, ...props }: React.HTMLAttributes<HTMLDivEl
   return (
     <div
       className={cn(
-        "inline-flex h-9 items-center justify-start border-b border-border text-muted-foreground",
+        "inline-flex h-9 items-center justify-start border-b border-glass-border text-muted-foreground",
         className,
       )}
       {...props}
@@ -40,12 +40,16 @@ export function TabsTrigger({
         "relative inline-flex items-center justify-center whitespace-nowrap px-3 py-1.5 font-display text-xs tracking-[0.1em] uppercase transition-all cursor-pointer",
         "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
         active
-          ? "text-foreground after:absolute after:bottom-0 after:left-0 after:right-0 after:h-px after:bg-foreground"
+          ? "text-foreground"
           : "hover:text-foreground",
         className,
       )}
       onClick={onClick}
       {...props}
-    />
+    >
+      {active && (
+        <span className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-warning to-transparent" />
+      )}
+    </button>
   );
 }
